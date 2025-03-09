@@ -37,11 +37,13 @@ func squareNumber(num: Int) -> Int {
 
 func areaOfTteCircle(radius: Double) -> Double {
     let pi = 3.14
-    return pi * radius
+    return pi * (radius * radius)
 }
 
+let area1 = areaOfTteCircle(radius: 20)
+print(area1)
 
-
+print("-----------------------")
 // MARK: 5. Создать функцию, которая принимает логический тип “ночь ли сегодня” и возвращает строку с описанием времени суток. Можно делать с логическим типом, можно делать со временем.
 
 // вариант 1
@@ -96,7 +98,7 @@ func differentNumberOfPhone(number: String) -> String {
         print("Введите корректное значение номера телефона равное 12 символам в формате +7**********")
     }
 
-    return "Код страны \(numberPhone.prefix(2)),  номер телефона \(numberPhone.suffix(7))"
+    return "\n Код страны: \(numberPhone.prefix(2)) \n номер оператора сотовой связи: \(numberPhone.dropFirst(2).dropLast(7)) \n номер телефона: \(numberPhone.suffix(7))"
 
 }
 
@@ -107,35 +109,86 @@ print("-----------------------")
 
 //MARK: 8*. Создать функцию, принимающую 1 аргумент — число от 0 до 100, и возвращающую true, если оно простое, и false, если сложное. Рекомендую попробовать решать рекурсией, чтобы разобраться как она работает.
 
-func evenOrOddNumber(number: Int) -> Bool {
-    guard number >= 100 && number < 0 else
-    { print("Число должно быть от 0 до 100.")
-        return false }
+func primeNumber(number: Int) -> Bool {
+    if number < 2 {
+            return false
+        }
 
-    if number % 2 == 0 {
+    if number == 2 {
+        return true
+    }
+
+    if number / number == 1 && number / 1 == number {
         return true
     } else {
         return false
-    }
+     }
 }
-evenOrOddNumber(number: 100)
 
 
 print("-----------------------")
 
 // MARK: 9*. Создать функцию, которая считает факториал введённого числа.
+// вариант 1 - рекурсия
+func factorialRecursive(_ n: Int) -> Int {
+    if n == 0 || n == 1 {
+        return 1
+    }
 
-func factorial(n: Int) {
-let result = ((n - 1) * n)
-    print(result)
+    return n * factorialRecursive(n - 1)
 }
 
-factorial(n: 15)
+//вариант 2 - цикл
+func factorialIterative(_ n: Int) -> Int {
+    if n == 0 || n == 1 {
+        return 1
+    }
+    var result = 1
+    for i in 2...n {
+        result *= i
+    }
+    return result
+}
+let factorialRecurs = factorialRecursive(5)
+let factorialIterat = factorialIterative(5)
+print(factorialRecurs)
+print(factorialIterat)
+
 print("-----------------------")
 
 
 
 // MARK: 10*. Создать функцию, которая выводит все числа последовательности Фибоначчи до введённого индекса. Например fib(n:6) -> 0, 1, 1, 2, 3, 5, 8 * пока не разобралась*
+
+func fibonacciSequence(n: Int) {
+    if n < 0 {
+        print("Ошибка: индекс должен быть неотрицательным.")
+        return
+    }
+
+    if n == 0 {
+        print("0")
+        return
+    }
+
+    if n == 1 {
+        print("0, 1")
+        return
+    }
+
+    var a = 0
+    var b = 1
+
+    print("0, 1", terminator: "")
+
+    for _ in 2...n {
+        let nextNumber = a + b
+        print(", \(nextNumber)", terminator: "")
+        a = b
+        b = nextNumber
+    }
+    print()
+}
 
 
 //MARK: 11*. Создать функцию, которая считает сумму цифр четырехзначного числа,
